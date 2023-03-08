@@ -32,13 +32,23 @@ const sade = JSON.parse(saveMessage);
 console.log(sade);
 
 function onFormSubmit(e) {
-  e.preventDefault();
-  console.log('otpravlyaem formu');
-  e.currentTarget.reset();
-  localStorage.removeItem(STORAGE_KEY);
+  if (!refs.email.value || !refs.textarea.value) {
+    e.preventDefault();
+    alert('Заповніть всі поля!');
+    return;
+  } else {
+    e.preventDefault();
+    console.log('otpravlyaem formu');
+    e.currentTarget.reset();
+    localStorage.removeItem(STORAGE_KEY);
+  }
 }
 
 function populateTextarea() {
-  refs.textarea.value = care.message;
-  refs.email.value = care.email;
+  // if () {
+  //   return console.log('pop');
+  // } else {
+  //   refs.textarea.value = care.message;
+  //   refs.email.value = care.email;
+  // }
 }
