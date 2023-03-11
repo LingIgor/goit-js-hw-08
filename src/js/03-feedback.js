@@ -1,54 +1,37 @@
-// import throttle from 'lodash.throttle';
+const formEL = document.querySelector('.feedback-form');
+const emailEl = document.querySelector('.feedback-form input');
+const textareaEl = document.querySelector('.feedback-form textarea');
 
-const refs = {
-  form: document.querySelector('.feedback-form'),
-  textarea: document.querySelector('.feedback-form textarea'),
-  email: document.querySelector('.feedback-form input'),
-};
+const LOCAL_NAME = 'feedback-form-state';
 
-const STORAGE_KEY = 'feedback-form-state';
+formEL.addEventListener('input', onFormInput);
+formEL.addEventListener('submit', onFormSubmit);
 
-const formData = {};
+populateForm();
 
-refs.form.addEventListener('submit', onFormSubmit);
-// refs.textarea.addEventListener('input', throttle(onTextAreaInput, 500) );
-refs.form.addEventListener('input', e => {
-  formData[e.target.name] = e.target.value;
-  // console.log(formData)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-});
-
-const save = localStorage.getItem(STORAGE_KEY);
-const care = JSON.parse(save);
-console.log(save);
-console.log(care);
-
-populateTextarea();
-
-const saveMessage = localStorage.getItem(STORAGE_KEY);
-console.log(saveMessage);
-// console.log(saveMessage)
-const sade = JSON.parse(saveMessage);
-console.log(sade);
-
-function onFormSubmit(e) {
-  if (!refs.email.value || !refs.textarea.value) {
-    e.preventDefault();
-    alert('Заповніть всі поля!');
-    return;
-  } else {
-    e.preventDefault();
-    console.log('otpravlyaem formu');
-    e.currentTarget.reset();
-    localStorage.removeItem(STORAGE_KEY);
-  }
+function onFormInput() {
+  formData = {
+    emailEl: emailEl.value,
+    textareaEl: textareaEl.value,
+  };
+  localStorage.setItem(LOCAL_NAME, JSON.stringify(formData));
 }
 
-function populateTextarea() {
-  // if () {
-  //   return console.log('pop');
-  // } else {
-  //   refs.textarea.value = care.message;
-  //   refs.email.value = care.email;
-  // }
+function onFormSubmit(e) {
+  e.preventDefault();
+  if (emailEl.value === '' || textareaEl.value === '') {
+    return alert('Заповніть всі поля!');
+  }
+
+  localStorage.removeItem(LOCAL_NAME);
+  e.currentTarget.reset();
+}
+
+function populateForm() {
+  const saveLocalStorage = localStorage.getItem(LOCAL_NAME);
+  const objectFromLocalStorage = JSON.parse(saveLocalStorage);
+  if (objectFromLocalStorage) {
+    emailEl.value = objectFromLocalStorage.emailEl;
+    textareaEl.value = objectFromLocalStorage.textareaEl;
+  }
 }
