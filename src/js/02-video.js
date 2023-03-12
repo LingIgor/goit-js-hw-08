@@ -19,4 +19,4 @@ const saveTime = localStorage.getItem('videoplayer-current-time');
 
 const timeStop = JSON.parse(saveTime);
 
-player.setCurrentTime(timeStop || 0);
+player.setCurrentTime(timeStop);
