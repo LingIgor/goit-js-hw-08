@@ -17,7 +17,7 @@ function onFormInput() {
     textareaEl: textareaEl.value,
   };
   localStorage.setItem(LOCAL_NAME, JSON.stringify(formData));
-  console.log(formData);
+  // console.log(formData);
 }
 
 function onFormSubmit(e) {
@@ -38,6 +38,10 @@ function onFormSubmit(e) {
       return alert(random[Math.floor(Math.random() * random.length)]);
     }
   }
+
+  const saveLocalStorage = localStorage.getItem(LOCAL_NAME);
+  const objectFromLocalStorage = JSON.parse(saveLocalStorage);
+  console.log(objectFromLocalStorage);
 
   localStorage.removeItem(LOCAL_NAME);
   e.currentTarget.reset();
