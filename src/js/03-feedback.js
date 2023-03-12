@@ -23,7 +23,20 @@ function onFormInput() {
 function onFormSubmit(e) {
   e.preventDefault();
   if (emailEl.value === '' || textareaEl.value === '') {
-    return alert('Заповніть всі поля!');
+    const random = [
+      'Заповніть всі поля!',
+      'Гарна спроба, спробуй ще!',
+      'Все ж таки заповни всі форми!',
+      'НУ скільки можна, заповни їх!',
+      'І довго ми так будемо гратись?',
+      'Пішла друга година... заповни всі поля! =)',
+      'Я так можу цілий день, а ти? =)',
+    ];
+
+    for (let i of random) {
+      // console.log();
+      return alert(random[Math.floor(Math.random() * random.length)]);
+    }
   }
 
   localStorage.removeItem(LOCAL_NAME);
