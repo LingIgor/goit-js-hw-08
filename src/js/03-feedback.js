@@ -12,11 +12,12 @@ formEL.addEventListener('submit', onFormSubmit);
 populateForm();
 
 function onFormInput() {
-  formData = {
+  const formData = {
     emailEl: emailEl.value,
     textareaEl: textareaEl.value,
   };
   localStorage.setItem(LOCAL_NAME, JSON.stringify(formData));
+  console.log(formData);
 }
 
 function onFormSubmit(e) {
